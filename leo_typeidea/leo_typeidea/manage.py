@@ -3,7 +3,8 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "leo_typeidea.settings")
+    profile = os.environ.get("LEO_TYPEIDEA_PROFILE","develop")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "leo_typeidea.settings.{}".format(profile))
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
