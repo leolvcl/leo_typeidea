@@ -1,0 +1,51 @@
+ORM: (object relational mapping)  对象关系映射
+verbose_name :页面展示使用
+models.DateTimeField:对应sql里的datetime类型
+auto_now_add: DateTimeField特有属性，True时django会默认创建当前时间
+DML： 数据库操作语言
+CRUD ： 增删改查
+status = models.PositiveIntegerField(default=STATUS_NORMAL, choices=STATUS_ITEMS, verbose_name='状态')
+对于有choice的字段，django会在admin后上提供一个下拉列表
+
+常见字段类型
+1、数值型
+    1.1 AutoField int(11) 自增主键 django默认，完整定义id = models.AutoField(primary_key=True)
+    1.2 BooleanField tinyint(1) 布尔类型，记录状态
+    1.3 DecimalField decimal 精度要求高时使用，（max_digits=8,decimal_places=2）长度为8精度为2的数字
+    1.4 IntegerField int(11) 不自增
+    1.5 PositiveIntegerField 只包含正整数
+    1.6 SmallIntegerField smallint 小整数时用到
+2、字符型
+    2.1 CharField varchar 基础的varchar类型
+    2.2 URLField 继承自CharField，但是实现对url的特殊处理
+    2.3 UUIDField char（32） 在PostgreSQl中是uuid类型，其余数据库是char（32）
+    2.4 EmailField 多了对email的特殊处理
+    2.5 FileField 多了对文件的特殊处理，admin展示时会出现一个会上传文件的按钮
+    2.6 TextField longtext 存放大量文本内容：新闻博客正文
+    2.7 ImageField 继承自FileField处理图片相关数据，展示会不同
+3、日期类型
+    3.1 DateField
+    3.2 DateTimeField
+    3.3 TimeField
+4、关系类型
+    4.1 ForeignKey 外键 与一对一一样 但是多了unique
+    4.2 OneToOneField 一对一
+    4.3 ManyToManyField 多对多 会创建一个中间表
+
+参数
+    null 与blank对比考虑 在数据库层面 允许为空
+    blank 针对业务层面 是否允许为空
+    choice 在admin页面会有下拉选项显示
+    db_column 指定Model中的某个字段对应数据库的哪个字段
+    db_index 索引配置 业务上经常查询的字段需配置
+    editable 是否可编辑默认True 若不想显示在页面上可设为False
+    error_messages 自定义字段值校验失败时的异常显示，字典格式，key可选null,blank,invalid,invalid_choice,unique,unique_for_date
+    help_text 字段提示语，页面对应的字段下方会展示此置
+    primary_key 主键unique=True 不需要设置db_index
+    unique 唯一约束，不需要设置db_index
+    unique_for_date 针对date（日期)的约束例如 unique_for_date="created_time"
+    不是对数据库的约束
+    unique_for_month 针对月份联合约束
+    unique_for_date 针对年份联合约束
+    verbose_name 字段对应的展示文案
+    validators 自定义校验逻辑类似form
