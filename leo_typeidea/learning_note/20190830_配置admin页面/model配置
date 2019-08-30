@@ -1,0 +1,4 @@
+Model的__str__方法
+    # 配置类的__str__方法
+    def __str__(self):
+        return self.name
