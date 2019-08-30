@@ -41,7 +41,7 @@ QuerySet
                print(post.category)
     3.4 prefetch_related 针对多对多的数据可以解决n+1的问题
 4 常用的字段查询
-    例：Post.objects.filter(content_contains='查询条件')中contains属于查询字段
+    例：Post.objects.filter(content__contains='查询条件')中contains属于查询字段
     4.1 contains 包含，进行相似查询
     4.2 icontains 忽略大小写
     4.3 exact 精确匹配

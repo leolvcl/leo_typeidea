@@ -59,6 +59,7 @@ class Post(models.Model):
     content = models.TextField(verbose_name='正文',help_text='正文必须是markdown格式')
     status = models.PositiveIntegerField(default=STATUS_NORMAL,choices=STATUS_ITEMS,verbose_name='状态')
     tag = models.ManyToManyField(Tag,verbose_name='标签')
+    category = models.ForeignKey(Category, verbose_name="分类", on_delete=models.DO_NOTHING)
     owner = models.ForeignKey(User,verbose_name='作者')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
 

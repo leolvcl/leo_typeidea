@@ -2,18 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3ef7a0-03a2-4b7f-9148-47605507b91f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/admin配置" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/model配置" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/发布文章需求" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0002_auto_20190830_2205.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/migrations/0002_auto_20190830_2205.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/migrations/0002_auto_20190830_2205.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_2根据需求定制admin/定制需求" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminforms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/admin配置" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_1配置admin页面/admin配置" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/model配置" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_1配置admin页面/model配置" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/发布文章需求" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_1配置admin页面/发布文章需求" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/QuerySet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190829_5_34_Model层介绍/QuerySet.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/model.txt" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190829_5_34_Model层介绍/model.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0002_auto_20190830_2205.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/migrations/0002_auto_20190830_2205.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/migrations/0002_auto_20190830_2205.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,6 +25,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,6 +52,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/git_objects/typeidea-master" />
     <property name="settings.editor.selected.configurable" value="copyright.filetypes.Python" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/leo_typeidea/learning_note/20190829_5_34_Model层介绍" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

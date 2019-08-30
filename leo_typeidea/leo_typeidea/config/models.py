@@ -39,7 +39,7 @@ class Sidebar(models.Model):
         (4,'最近评论')
     )
     title = models.CharField(max_length=50,verbose_name='标题')
-    diaplay_type = models.PositiveIntegerField(default=1,choices=SIDE_TYPE,verbose_name='展示类型')
+    display_type = models.PositiveIntegerField(default=1,choices=SIDE_TYPE,verbose_name='展示类型')
     content = models.CharField(max_length=500,blank=True,verbose_name='内容',help_text='如果设置不是HTML类型，可为空')
     status = models.PositiveIntegerField(default=STATUS_SHOW,choices=STATUS_ITEMS,verbose_name='状态')
     owner = models.ForeignKey(User,verbose_name='作者')
