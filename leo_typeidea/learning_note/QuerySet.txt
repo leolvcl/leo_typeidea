@@ -1,0 +1,74 @@
+QuerySet
+
+1 简介
+    概念：同数据库交互的工具
+    使用：Post.objects.all（）可以获得QuerySet对象
+    QuerySet：是懒加载的，只有真正用到时才会去执行查询
+    链式调用：可以链式调用例如:posts = Post.objetcs.filter(id>2).filter(status=1)...
+
+2 常用的QuerySet接口
+    2.1 支持链式调用的接口
+        2.1.1 all 等于select * from table_name 查询所有数据
+        2.1.2 filter 过滤数据 常用等于、不等于、大于、大于等于。。。
+        2.1.3 exclude 同filter，但是逻辑相反
+        2.1.4 reverse 将QuerySet的结果倒序
+        2.1.5 distinct 去重查询 select distinct
+        2.1.6 none 返回空的QuerySet
+    2.2 不支持链式调用的接口
+        2.2.1 get 例如：Post.objects.get(id=2),存在返回Post实例，否则抛出DoesNotExist异常
+        2.2.2 create 创建model对象
+        2.2.3 get_or_create 按照条件查找，查不到就创建
+        2.2.4 update_or_create 同上，作用是更新
+        2.2.5 count 返回QuerySet有多少记录 select count(*) from table_name
+        2.2.6 latest 获取最新的一条记录 需在meta中定义get_latest_by = <排序字段>
+        2.2.7 earliest 同上 最早的记录
+        2.2.8 first 从当前QuerySet中获取第一条数据
+        2.2.9 last 同上 最后一条
+        2.2.10 exists 返回True或False，仅用于判断QuerySet是否有数据
+        2.2.11 bulk_create 同create 批量创建记录
+        2.2.12 in_bulk 批量查询，接收两个参数id_list和filed_name例：Post.objects.inbulk([1,2,3])查询id为123的数据返回字典类型
+        2.2.13 update 根据条件批量更新记录 例 Post.objects.filter(owner_name='leo').update(title='测试更新')
+        2.2.14 delete 同update 根据条件批量删除记录 与update一样都会触发django的signal
+        2.2.15 values 只需要返回某个字段的值，不需要model实例时可以使用，例：title_list = Post.objects.filter(category_id=1).values('title')返回包含dict的QuerySet
+        2.2.16 values_list 同values但是返回的是包含tuple的QuerySet，若只是一个字段的话可以增加flat=True参数
+3 进阶接口
+    3.1 defer 把不需要的字段做延迟加载 例 posts = Post.objects.all().defer('content')，拿到的记录不包含content字段，但是使用时还是会加载
+        常用于不想加载过大的字段（例如text），但是会出现n+1的查询问题
+    3.2 only 同defer但是接口正相反，只获取想要的内容
+    3.3 select_related 用来解决外键产生的n+1问题的方案 只能解决一对多的关系
+        例 posts = Post.objects.all().select-related('category')
+           for post in posts:
+               print(post.category)
+    3.4 prefetch_related 针对多对多的数据可以解决n+1的问题
+4 常用的字段查询
+    例：Post.objects.filter(content_contains='查询条件')中contains属于查询字段
+    4.1 contains 包含，进行相似查询
+    4.2 icontains 忽略大小写
+    4.3 exact 精确匹配
+    4.4 iexact 忽略大小写
+    4.5 in 在某个集合中 例：Post.objects.filter(id_in=[1,2,3]) 等于 select * from blog_post where in (1,2,3)
+    4.6 gt/gte/lt/lte 大于、大于等于、小于、小于等于
+    4.7 startswith/istartswith 以某个字符串开头 类似contains只是会产生like ‘<关键字>%’这样的sql/忽略大小写
+    4.8 endswith/iendswith 以某个字符串结尾/忽略大小写
+    4.9 range 范围查询，多用于时间范围 select * from table_name where '查询字段' between a and b
+        日期类查询很多比如date、year、month
+5 进阶查询
+    5.1 F 常用于执行数据层的计算，避免多线程竞争情况比如访问量的问题
+        from django.db.models import F
+            post = Post.objects.get(id=1)
+            post.pv = F('pv') +1  # 假设pv为post中访问量的字段
+            post.save()
+    5.2 Q 解决or、and查询
+        from django.db.models import F
+            Post.objects.filter(Q(id=1) | Q(id=2))
+            Post.objects.filter(Q(id=1) & Q(id=2))
+    5.3 Count 聚合查询
+        from django.db.models import Count
+            categories = Category.objects.annotate(posts_count=Count('post'))
+            print(categories[0].posts_count)
+        相当于给category动态增加属性posts_count 此属性来源于Count（‘post’）
+    5.4 Sum 与Count类似 但是是用来做合计
+        from django.db.models import Count
+            Post.objects.aggregate(all_pv=Sum('pv')) # 统计当前所有文章的访问量总和
+6 原生sql接口
+    Post.objects.raw('select * from table_name')
