@@ -1,0 +1,40 @@
+详情请参考 http://numba.pydata.org/numba-doc/latest/user/index.html
+快速编写Python代码
+简介：
+    Numba是一个开源JIT编译器，它将Python和NumPy代码的子集转换为快速机器代码。
+功能：
+    1 加速Python功能
+        Numba使用行业标准的LLVM编译器库在运行时将Python函数转换为优化的机器代码。Python中的Numba编译数值算法可以接近C或FORTRAN的速度。
+        您不需要替换Python解释器，运行单独的编译步骤，甚至不需要安装C / C ++编译器。只需将其中一个Numba装饰器应用到Python函数中，Numba就会完成剩下的工作
+        示例代码：
+            numba02.py
+            可直观看到使用numba前后的运行时间的差距
+    2 专为科学计算而打造
+        Numba旨在与NumPy阵列和功能一起使用。Numba为不同的阵列数据类型和布局生成专门的代码，以优化性能。特殊装饰器可以创建通用功能，
+            可以像NumPy函数那样在NumPy数组上进行广播。
+        Numba还可以与Jupyter笔记本电脑配合使用，实现交互式计算，以及分布式执行框架，如Dask和Spark。
+
+    3 并行化您的算法
+        3.1 Numba提供了一系列用于并行化CPU和GPU代码的选项，通常只需要很少的代码更改。
+            3.1.1简化线程
+                Numba可以在多个CPU内核上自动执行NumPy数组表达式，并且可以轻松编写并行循环。
+                @jit(nopython=True, parallel=True)
+                def simulator(out):
+                    # iterate loop in parallel
+                    for i in prange(out.shape[0]):
+                        out[i] = run_sim()
+        3.2 SIMD矢量化
+            3.2.1 LBB0_8:
+                Numba可以自动将一些循环转换为向量指令，以提高2-4倍的速度。无论您的CPU支持SSE，AVX还是AVX-512，Numba都能适应您的CPU功能。
+                vmovups	(%rax,%rdx,4), %ymm0
+                vmovups	(%rcx,%rdx,4), %ymm1
+                vsubps	%ymm1, %ymm0, %ymm2
+                vaddps	%ymm2, %ymm2, %ymm2
+        3.1 GPU加速
+            Numba支持NVIDIA的CUDA和AMD的ROCm驱动程序，可让您完全使用Python编写并行GPU算法。
+
+    4 便携式编译
+        运送高性能Python应用程序，而不必担心二进制编译和打包。您的源代码仍然是纯Python，而Numba在运行时处理编译。
+            我们在200多种不同的平台配置中持续测试Numba。
+        Numba支持Intel和AMD x86，POWER8 / 9和ARM CPU，NVIDIA和AMD GPU，Python 2.7和3.4-3.7，以及Windows / macOS / Linux。
+            大多数系统的预编译Numba二进制文件可用作conda包和可装入pip的轮子。

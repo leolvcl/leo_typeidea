@@ -1,14 +1,24 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
+import requests
+from django.contrib.auth import get_permission_codename
+PERMISION_API = 'http://permision.sso.com/has_perm?user={}&perm_codO={}'
+
 
 from .models import Post, Category, Tag
 from .adminforms import PostAdminForm
-
+from leo_typeidea.custom_site import custom_site
 # Register your models here.
+
+class PostInline(admin.TabularInline):  # StackInline 样式不同
+    fields = ('title','desc')
+    extra = 1  # 控制额外多几个
+    model = Post
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    inlines = [PostInline,]
     list_display = ('name', 'status', 'is_nav', 'created_time', 'owner', 'post_count')
     fields = ('name', 'status', 'is_nav', 'owner')  # 控制页面显示的字段
 
@@ -62,7 +72,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
         return queryset
 
 
-@admin.register(Post)
+@admin.register(Post,site=custom_site)
 class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
     list_display = (
@@ -107,7 +117,7 @@ class PostAdmin(admin.ModelAdmin):
         # reverse 可以根据名称解析出url地址
         return format_html(
             '<a href="{}">编辑</a>',
-            reverse('admin:blog_post_change', args=(obj.id,))
+            reverse('cus_admin:blog_post_change', args=(obj.id,))
         )
 
     operator.short_description = '操作'  # 指定表头的展示方案
@@ -125,3 +135,13 @@ class PostAdmin(admin.ModelAdmin):
             'all':('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',),
         }
         js = ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js')
+
+    def has_add_permission(self, request):
+        opts = self.opts
+        codename = get_permission_codename('add',opts)
+        perm_code = '{}.{}'.format(opts.app_label,codename)
+        resp = requests.get(PERMISION_API.format(request.user.username,perm_code))
+        if resp.status_code == 200:
+            return True
+        else:
+            return False

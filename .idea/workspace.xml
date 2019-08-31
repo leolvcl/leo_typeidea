@@ -2,23 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3ef7a0-03a2-4b7f-9148-47605507b91f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_2根据需求定制admin/定制需求" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminforms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/custom_site.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo学习日记/0831_numba/numba01.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo学习日记/0831_numba/numba02.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo学习日记/0831_numba/numba03.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo学习日记/0831_numba/官方文档" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/admin配置" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_1配置admin页面/admin配置" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/model配置" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_1配置admin页面/model配置" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_配置admin页面/发布文章需求" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_1配置admin页面/发布文章需求" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/QuerySet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190829_5_34_Model层介绍/QuerySet.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/model.txt" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190829_5_34_Model层介绍/model.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_2根据需求定制admin_上/定制需求" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/20190830_6_2根据需求定制admin/定制需求" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0002_auto_20190830_2205.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/migrations/0002_auto_20190830_2205.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/migrations/0002_auto_20190830_2205.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,6 +47,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/leo_typeidea/leo学习日记/0831_numba" />
       <recent name="$PROJECT_DIR$/leo_typeidea/learning_note/20190829_5_34_Model层介绍" />
     </key>
   </component>
@@ -69,6 +62,78 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Python.numba03">
+    <configuration name="numba01" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="lvcl01" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/leo_typeidea/leo学习日记0831-numba.jit" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/leo_typeidea/leo学习日记0831-numba.jit/numba01.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="numba02" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="lvcl01" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/leo_typeidea/leo学习日记0831-numba.jit" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/leo_typeidea/leo学习日记0831-numba.jit/numba02.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="numba03" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="lvcl01" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/leo_typeidea/leo学习日记0831-numba.jit" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/leo_typeidea/leo学习日记0831-numba.jit/numba03.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.numba03" />
+        <item itemvalue="Python.numba02" />
+        <item itemvalue="Python.numba01" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />

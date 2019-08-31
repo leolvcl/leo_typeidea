@@ -1,0 +1,133 @@
+6.2.1 定义list页面
+    自己使用自己开发的系统，作为用户体验系统流程
+    1 自定义list_filter需求
+    2 自定义列表页数据
+
+6.2.2 编辑页面的配置
+    需要被定制的东西
+        1.按钮位置
+            save_on_top 控制展示的三个按钮是否在上方展示
+        2.需要用户填写的字段，哪些不用填写甚至不用展示
+            1)fields或者fieldset配置是否展示及展示顺序，
+                fieldset 控制页面布局，控制展示哪些元素，也可以排序元素或者组合元素位置，要求的格式是有两个元素的tuple，
+                第一个元素是当前板块的名称，第二个元素是当前板块的描述
+                第一个元素是string，第二个是dict，而dict的key可以是：fields/description/classes
+                    其中 classes是给配置的元素的板块加上css属性，django admin默认的是collapse和wide
+                例：fieldset = (
+                        (名称,{内容}),
+                        (名称,{内容})
+                    )
+            2)exclude 指定哪些字段不用展示 1）限定要展示的字段 2）配置展示字段的顺序
+                例：
+                    exclude = ('owner',)  # 自动赋值当前用户
+        3.页面字段展示顺序是否可以调整，展示位置是否可以调整
+        4.输入框的样式
+        5.编辑页的配置
+            filter_horizontal 和 filter_vertical
+            控制多对多字段的展示效果，横向或者竖向
+                filter_horizontal = ('tag',)  横
+                filter_vertical = ('tag',)  竖
+
+6.2.3 自定义静态资源引入
+    在PostAdmin下新增属性：通过自定义Media类添加想要添加的js和css资源
+        class Media:
+            css = {
+                'all':('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',),
+            }
+            js = ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js')
+
+6.2.4 自定义 Form
+    Form和Model是耦合在一起的，即逻辑一致
+    新建一个adminforms.py文件，写入如下内容
+        from django import forms
+        class PostAdminForm(forms.ModelForm):
+            desc = forms.CharField(widget=forms.Textarea,label='摘要',required=False)
+    在admin中引入adminforms.py文件中的PostAdminForm，在PostAdmin下面加上一句
+        class PostAdmin(admin.ModelAdmin):
+            form = PostAdminForm
+6.2.5 在同一页面编辑关联数据
+    在分类页面直接编辑文章——伪需求，因为内置（inline）的编辑相关内容适合字段更少的Model
+        在blog/admin.py 中增加
+            class PostInline(admin.TabularInline):  # StackInline 样式不同
+                fields = ('title','desc')
+                extra = 1  # 控制额外多几个
+                model = Post
+            class CategoryAdmin(admin.ModelAdmin):
+                inlines = [PostInline,]
+        此时进入分类编辑页面，就能看到页面下方多了一个新增/编辑文章的组件
+6.2.6 定制site
+    通过定制site实现一个系统对外提供多套admin后台的逻辑
+    url(r'^admin/', admin.site.urls) 对应一个site
+    需求：用户模块的管理应该跟文章分类等数据的管理分开，修改后台默认展示
+    实现：
+    1.urls同级创建custom_site.py文件写入下方代码
+        from django.contrib.admin import AdminSite
+        class CustomSite(AdminSite):
+            site_header = 'leo_Typeidea'
+            site_title = 'leo_Typeidea管理后台'
+            index_title = '首页'
+
+        custom_site = CustomSite(name='cus_admin')
+    2.修改所有App下的register部分的代码，以PostAdmin为例
+        from leo_typeidea.custom_site import custom_site
+        register部分修改为：
+            @admin.register(Post,site=custom_site)
+    3.同时：
+        def operator(self, obj):
+            return format_html(
+                '<a href="{}">编辑</a>',
+                reverse('admin:blog_post_change', args=(obj.id,))
+            )
+        修改为：
+        def operator(self, obj):
+            return format_html(
+                '<a href="{}">编辑</a>',
+                reverse('cus_admin:blog_post_change', args=(obj.id,))
+            )
+    4.然后 urls.py中修改为
+        urlpatterns = [
+            url(r'^super_admin/',admin.site.urls),
+            url(r'^admin/', custom_site.urls),
+        ]
+    此时，我们就有两套后台地址，一套管理用户，另一套管理业务
+6.2.7 admin的权限逻辑以及SSO登录 (single sign-on 单点登录)
+    1.setting配置AUTHENTICATATION_BACKENDS
+    2.在django admin中做——接口：
+        has_add_permission
+        has_change_permission
+        has_delete_permission
+        has_module_permission
+        例如：
+            http://permision.sso.com/has_perm?user<用户标识>&perm_code=<权限编码>
+            有权限响应状态为200，没有权限则为403
+    3.简单实现has_add_permission:
+        blog/admin.py
+            import requests
+            from django.contrib.auth import get_permission_codename
+            class PostAdmin(admin.ModelAdmin):
+                def has_add_permission(self, request):
+                    opts = self.opts
+                    codename = get_permission_codename('add',opts)
+                    perm_code = '{}.{}'.format(opts.app_label,codename)
+                    resp = request.get(PERMISION_API.format(request.user.username,perm_code))
+                    if resp.status_code == 200:
+                        return True
+                    else:
+                        return False
+    4.实际工作
+        1.双方统一用户标识及权限编码，接口规范
+        2.将权限信息保存在session中
+        3.权限变更，将当前系统中用户登出或系统主动清理缓存
+6.2.8 总结
+    1.admin有自己的一套CRUD管理后台，熟悉他将会减少很多工作量
+    2.遇到相关需求——>熟读admin部分文档——>理解模块之间的关系——>根据需求查看源代码
+6.2.9 参考
+    自定义 django site
+    format_html 用法
+    admin list_filter 定制
+    admin get_queryset 接口
+
+
+
+
+
