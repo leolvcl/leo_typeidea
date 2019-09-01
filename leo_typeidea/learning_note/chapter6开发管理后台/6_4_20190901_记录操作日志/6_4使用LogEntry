@@ -1,0 +1,34 @@
+6.4.1 使用LogEntry
+    ModelAdmin内部提供两个函数
+        log_addition
+        log_change
+    from django.contrib.admin.models import LogEntry,CHANGE
+    LogEntry.objects.log_action(
+        user_id=            当前用户id
+        content_type_id=    保存内容的类型 使用get_content_type_for_model(object).pk方法获取，ContentType为每个Model定义一个类型id
+        object_id=          记录变更实例的id，比如PostAdmin中就是post.id
+        object_repr=        实例的展示名字 可以理解为__str__
+        action_flag=        操作标记，基础标记有:ADDITION、CHANGE、DELETION 变更、新增和删除
+        change_message=     记录的消息，可自行定义
+    )
+6.4.2 查询某个对象的变更
+    使用：获取post中id为1的所有变更日志
+        from django.contrib.admin.models import LogEntry,CHANGE
+        from django.contrib.admin.options import get_content_type_for_model
+        post = Post.objects.filter(id=1)
+        log_entries = LogEntry.objects.filter(
+            content_type_id=get_content_type_for_model(post).pk,
+            object_id=post.id,
+        )
+6.4.3 在admin页面中查看操作日志
+        在blog/admin.py中新增
+            from django.contrib.admin.models import LogEntry
+            @admin.register(LogEntry,site=custom_site)
+            class LogEntryAdmin(admin.ModelAdmin):
+                list_display = [
+                    'object_repr',
+                    'object_id',
+                    'action_flag',
+                    'user',
+                    'change_message',
+                ]

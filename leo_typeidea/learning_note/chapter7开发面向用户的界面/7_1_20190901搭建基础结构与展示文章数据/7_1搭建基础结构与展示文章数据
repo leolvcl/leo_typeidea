@@ -1,0 +1,82 @@
+7.1.1分析url和页面数据
+    1.页面：
+        博客首页     https://www.leolvcl.com/
+        博文详情页   https://www.leolvcl.com/post/<post_id>.html
+        分类列表页   https://www.leolvcl.com/category/<category_id>/
+        标签列表页   https://www.leolvcl.com/<tag_id>/
+        友链展示页   https://www.leolvcl.com/links/
+    2.view逻辑：
+        根据不同的查询条件展示列表页    列表页view     根据不同查询条件分别展示博客首页、分类列表页和标签列表页
+        展示博文详情页                文章页view     展示欧文详情页
+        友链                        友链页view     展示所有友情链接
+7.1.2编写url代码
+    urls.py示例：
+        urlpatterns = [
+            url(r'^$',post_list),
+            url(r'^category/(?P<category_id>\d+)/$',post_list),
+            url(r'^tag/(?P<tag_id>\d+)/$',post_list),
+            url(r'^post/(?P<>post_id\d+).html$',post_datail),
+            url(r'^links/$',links),
+            url(r'^super_admin/',admin.site.urls),
+            url(r'^admin/', custom_site.urls),
+        ]
+    url参数解释：
+        url(<正则或者字符串>,<view_function>,<固定参数context>，<url的名称>)
+    示例：
+        url(r'^category/(?P<category_id>\d+)/$',    # 带group的正则表达式，将url这个位置的字符作为名为category_id的参数传给post_list函数
+            post_list,                              # 处理请求的函数
+            {'example':'nop'},                      # 默认传过去的参数
+            name='category_list'                    # url的名称
+            )
+7.1.3编写view代码
+    使用：
+        1.  from django.http import HttpResponse
+            def post_list(request,category_id=None,tag_id=None):
+                content = ...
+                return HttpResponse(content)
+        2.  from django.shortcuts import render
+            def post_list(...):
+                ...
+                return render(request,'blog/list.html',context={'name': 'post_list'})
+    render参数意义：
+        render(request, template_name, context=None, content_type=None, status=None, using=None):
+            request         封装了HTTP请求的request对象
+            template_name   模板名称，可以带上路径
+            context         字典数据，会传递到模板中
+            context_type    页面编码类型，默认text/html
+            status          状态码，默认200
+            using           使用哪种模板引擎解析，可在setting中设置
+7.1.4 配置模板
+    wsgi同级目录下创建templates文件夹
+    根据app名创建目录
+    在目录下创建html文件
+7.1.5 模板找不到的错误
+    上一步直接运行，进入127.0.0.1:8000:会报错
+        TemplateDoesNotExist at /
+        blog/list.html
+    解决办法：
+        leo_typeidea加入到INSTALLED_APPS中
+            INSTALLED_APPS = [
+                'leo_typeidea',
+                ...
+                ]
+        再次刷新即可看到正常输出
+7.1.6 编写正式的view代码
+    从model中把数据从数据库中读出来
+7.1.7 配置模板数据
+    list.html
+        <ul>
+            {% for post in post_list %}
+            <li>
+                <a href="/post/{{ post.id }}.html">{{ post.title }}</a>
+                <div>
+                <span>作者：{{ post.owner.username }}</span>
+                <span>分类：{{ post.category.name }}</span>
+                </div>
+                <p>{{ post.desc }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+
+
+

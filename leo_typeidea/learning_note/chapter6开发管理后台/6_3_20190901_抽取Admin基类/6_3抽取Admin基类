@@ -1,0 +1,16 @@
+6.3整理代码保证代码整洁
+    6.3.1 抽象author基类
+        抽象出基类BaseOwnerAdmin
+            1.重写save方法
+            2.重写get_queryset方法
+            3.具体代码实现，在custom.py统同级目录新建一个base_admin文件，在需要隔离不同用户数据的管理页面Admin继承BaseOwnerAdmin类即可
+                from django.contrib import admin
+                class BaseOwnerAdmin(admin.ModelAdmin):
+                    exclude = ('owner',)
+                    def get_queryset(self, request):
+                        qs = super(BaseOwnerAdmin,self).get_queryset(request)
+                        return qs.filter(owner=request.user)
+                    def save_model(self, request, obj, form, change):
+                        obj.owner = request.user
+                        return super(BaseOwnerAdmin,self).save_model(request,obj,form,change)
+
