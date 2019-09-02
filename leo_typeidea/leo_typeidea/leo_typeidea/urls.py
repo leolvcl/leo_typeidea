@@ -21,11 +21,11 @@ from blog.views import post_list,post_datail
 from config.views import links
 
 urlpatterns = [
-    url(r'^$',post_list),
-    url(r'^category/(?P<category_id>\d+)/$',post_list),
-    url(r'^tag/(?P<tag_id>\d+)/$',post_list),
-    url(r'^post/(?P<post_id>\d+).html$',post_datail),
-    url(r'^links/$',links),
-    url(r'^super_admin/',admin.site.urls),
-    url(r'^admin/', custom_site.urls),
+    url(r'^$',post_list,name='index'),
+    url(r'^category/(?P<category_id>\d+)/$',post_list,name='category-list'),
+    url(r'^tag/(?P<tag_id>\d+)/$',post_list,name='tag-list'),
+    url(r'^post/(?P<post_id>\d+).html$',post_datail,name='post-detail'),
+    url(r'^links/$',links,name='links'),
+    url(r'^super_admin/',admin.site.urls,name='super-admin'),
+    url(r'^admin/', custom_site.urls,name='admin'),
 ]

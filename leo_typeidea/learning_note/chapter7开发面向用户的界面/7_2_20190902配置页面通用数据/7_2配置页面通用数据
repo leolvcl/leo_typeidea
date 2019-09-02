@@ -1,0 +1,15 @@
+7.2.1 完善模板信息
+    1.修改post_list的逻辑
+    2.修改list.html代码
+7.2.2 重构post_list视图
+    1.把复杂的部分抽取成单独的函数
+    2.一个函数对多个url进行处理，造成过多的条件语句
+7.2.3 分类信息
+    1.models.py下新增部分代码
+    2.修改post_list中context的代码，家加上分类数据
+    3.通用方法修改post_detail
+    4.在list.html中新增代码
+7.2.4 侧边栏配置
+    1.models.py中SideBar下新增get_all
+    2.修改post_list和post_detail部分的代码
+    3.修改list.html和detail.html

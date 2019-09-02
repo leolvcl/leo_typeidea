@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Link, Sidebar
+from .models import Link, SideBar
 
 
 # Register your models here.
@@ -14,7 +14,7 @@ class LinkAdmin(admin.ModelAdmin):
         return super(LinkAdmin, self).save_model(request, obj, form, change)
 
 
-@admin.register(Sidebar)
+@admin.register(SideBar)
 class SidebarAdmin(admin.ModelAdmin):
     list_display = ('title', 'display_type', 'content', 'created_time')
     fields = ('title', 'display_type', 'content')

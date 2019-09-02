@@ -1,0 +1,16 @@
+7.4.1 抽象基础模板
+    1.创建base.html，留出{% block title %}     {% endblock %}
+    2.list.html detail.html以{% extend "./base.html" %}方式引入
+    3.什么时候抽象出子类——开闭原则
+        对扩展开放，对修改关闭
+7.4.2 解耦硬编码
+    reverse——反向解析
+        1.定义url时加上name参数
+        2.reverse将name反向解析成url
+    修改url代码
+        1.加上name：url(r'^post/(?P<post_id>\d+).html$',post_datail,name='post-detail')
+        2.html中使用：<a href="{% url 'post-detail' post.id %}">
+        3.如果url中有多个参数，可以在模板中传递多个参数，例：
+            {% url 'name' arg1 arg2 %}
+        4.如果定义的是关键字参数：
+            {% url 'name' arg1=arg1 agr2=arg2 %}
