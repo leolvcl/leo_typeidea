@@ -1,0 +1,56 @@
+使用类视图进行重构
+
+7.5.1 函数与类
+    1.代码逻辑被重复使用
+    2.存在需要共享的数据
+7.5.2 理解class-base view
+    django提供的class-base view
+        1.View          基础View，基于http方法的分发逻辑，get、post方法
+        2.TemplateView  继承自View，可以直接用来返回指定的模板，实现get方法，可以传递变量到模板中进行数据展示
+        3.DetailView    继承自View，实现get方法，可以绑定某一模板，获取单个实例的数据
+        4.ListView      继承自View，实现get方法，可以通过绑定模板批量获取数据
+    好处：
+        1.解耦了HTTP get、post等请求
+        2.不会触及已有的逻辑
+    1.修改view代码
+        class PostDetailView(DetailView):
+            model = Post
+            template_name = 'blog/detail/html'
+    2.修改html代码
+    3.修改url代码
+        url(r'^post/(?P<pk>\d+).html$',PostDetailView.as_view(),name='post-detail')
+        此处指定了pk为过滤post的参数，从而产生了Post.objetcs.filter(pk=pk)的效果
+    4.对于单个数据django已经封装好了获取数据的逻辑，只需简单配置一下即可获取最终结果
+    5.DetailView提供的属性接口
+        model               指定当前View要使用的Model
+        queryset            设定基础的数据集，可通过queryset=Post.objects.filter(status=Post.STATUS_NORMAL)进行过滤
+        template_name       模板名称
+        get_queryset        用来获取数据
+        get_object          根据url参数，从queryset获取对应的实例
+        get_context_data    获取渲染到模板的所有上下文，如有新增数据需传递到模板中，可重写该方法
+    6.ListView
+        获取多条数据，列表数据，若数据量过大，还需要完成分页功能
+        1.编写view代码
+            class PostListView(ListView):
+                queryset = Post.latest_posts()
+                paginate_by = 1  # 每页的数据
+                context_object_name = 'post_list'  # 如果不设置此项，在模板中需要使用object_list变量
+                template_name = 'blog/list.html'
+        2.修改html代码
+7.5.3 改造代码
+    一个例子：
+        class TagView(IndexView):
+            def get_context_data(self, **kwargs):
+                context = super().get_context_data(**kwargs)
+                tag_id = self.kwargs.get('tag_id')  # self.kwargs中的数据是从url定义中拿到的
+                tag = get_object_or_404(Category, pk=tag_id)  # 快捷方式，获取一个对象的实例，获取到就返货，没有就报404
+                context.update({
+                    'tag': tag,
+                })
+                return context
+
+            def get_queryset(self):
+                '''重写get_queryser方法，根据标签过滤'''
+                queryset = super().get_queryset()
+                tag_id = self.kwargs.get('tag_id')
+                return queryset.filter(tag_id=tag_id)

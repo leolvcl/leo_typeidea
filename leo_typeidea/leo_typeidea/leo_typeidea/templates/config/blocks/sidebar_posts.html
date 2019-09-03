@@ -7,7 +7,7 @@
 <body>
     <ul>
         {% for post in posts %}
-        <li><a href="/post/{{ post.id }}.html">{{ post.title }}</a></li>
+        <li><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></li>
         {% endfor %}
     </ul>
 </body>

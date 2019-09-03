@@ -1,0 +1,21 @@
+django处理请求流程
+    1.django接受一个http请求
+    2.经过所有middleware的process_request方法
+    3.解析成url
+    4.根据配置的url和view的映射将request传给view中
+7.6.1 class-based view处理流程
+    1.as_view的逻辑：返回一个闭包
+        1.给class（view类）赋值——request、args、kwargs
+        2.根据http方法分发请求
+    2.请求到达后的完整逻辑，以ListView为例
+        1.请求到达，调用get_queryset拿到数据源
+        2.调用get方法
+            1.调用get_queryset方法，拿到数据源
+            2.调用get_context_data方法，拿到需渲染到模板的数据
+                1.在get_context_data中，首先调用get_paginate_by拿到每页数据
+                2.调用get_context_boject_name拿到渲染到模板的queryset名称
+                3.调用paginate_queryset进行分页处理
+                4.拿到的数据转为dict并保存
+            3.调用render_to_response渲染数据到页面
+                1.调用get_template_names拿到模板名
+                2.把request、context、template_name等传递到模板中

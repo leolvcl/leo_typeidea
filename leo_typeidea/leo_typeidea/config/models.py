@@ -54,11 +54,11 @@ class SideBar(models.Model):
     def __str__(self):
         return self.title
 
-    @classmethod
-    def get_all(cls):
-        return cls.objects.filter(status=cls.STATUS_SHOW)
+    # @classmethod
+    # def get_all(cls):
+    #     return cls.objects.filter(status=cls.STATUS_SHOW)
 
-    @property
+    # @property
     def content_html(self):
         '''直接渲染模板'''
         from blog.models import Post  # 避免循环引用
@@ -74,12 +74,12 @@ class SideBar(models.Model):
             result = render_to_string('config/blocks/sidebar_posts.html',context)
         elif self.display_type == self.DISPLAY_HOT:
             context = {
-                'post':Post.hot_posts()
+                'posts':Post.hot_posts()
             }
             result = render_to_string('config/blocks/sidebar_posts.html',context)
         elif self.display_type == self.DISPLAY_COMMENT:
             context = {
-                'posts':Comment.objects.filter(status=Comment.STATUS_NORMAL)
+                'comment':Comment.objects.filter(status=Comment.STATUS_NORMAL)
             }
             result = render_to_string('config/blocks/sidebar_comments.html',context)
         return result

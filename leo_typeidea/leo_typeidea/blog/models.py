@@ -40,25 +40,25 @@ class Category(models.Model):
     #         'nav':nav_categories,
     #         'categories':normal_categories
     #     }
-    @classmethod
-    def get_navs(cls):
-        '''
-        获取所有的分类，并且区分是否为导航
-        只进行一次数据库查询
-        :return:
-        '''
-        categories = cls.objects.filter(status=cls.STATUS_NORMAL)
-        nav_categories = []
-        normal_categories = []
-        for cate in categories:
-            if cate.is_nav:
-                nav_categories.append(cate)
-            else:
-                normal_categories.append(cate)
-        return {
-            'nav': nav_categories,
-            'categories': normal_categories
-        }
+    # @classmethod
+    # def get_navs(cls):
+    #     '''
+    #     获取所有的分类，并且区分是否为导航
+    #     只进行一次数据库查询
+    #     :return:
+    #     '''
+    #     categories = cls.objects.filter(status=cls.STATUS_NORMAL)
+    #     nav_categories = []
+    #     normal_categories = []
+    #     for cate in categories:
+    #         if cate.is_nav:
+    #             nav_categories.append(cate)
+    #         else:
+    #             normal_categories.append(cate)
+    #     return {
+    #         'nav': nav_categories,
+    #         'categories': normal_categories
+    #     }
 
 
 class Tag(models.Model):
@@ -136,7 +136,7 @@ class Post(models.Model):
 
     @classmethod
     def latest_posts(cls):
-        queryset = cls.objects.filter(status=cls.STATUS_NORMAL)
+        return cls.objects.filter(status=cls.STATUS_NORMAL)
 
     @classmethod
     def hot_posts(cls):

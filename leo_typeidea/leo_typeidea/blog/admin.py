@@ -19,12 +19,6 @@ from leo_typeidea.custom_site import custom_site
 # Register your models here.
 
 from django.contrib.admin.models import LogEntry,CHANGE
-# from django.contrib.admin.options import get_content_type_for_model
-# post = Post.objects.filter(id=1)
-# log_entries = LogEntry.objects.filter(
-#     content_type_id=get_content_type_for_model(post).pk,
-#     object_id=post.id,
-# )
 
 
 # 可选择集成自admin.StackedInline，获取不同样式
@@ -41,10 +35,6 @@ class CategoryAdmin(BaseOwnerAdmin):
     list_display = ('name', 'status', 'is_nav', 'created_time', 'post_count')
     fields = ('name', 'status', 'is_nav')  # 控制页面显示的字段
 
-    # def save_model(self, request, obj, form, change):
-    #     obj.owner = request.user
-    #     return super(CategoryAdmin, self).save_model(request, obj, form, change)
-
     # 展示该分类下有多少篇文章
     def post_count(self, obj):
         return obj.post_set.count()
@@ -58,12 +48,8 @@ class CategoryAdmin(BaseOwnerAdmin):
 
 @admin.register(Tag)
 class TagAdmin(BaseOwnerAdmin):
-    list_display = ('name', 'status', 'created_time', 'owner')
-    fields = ('name', 'status', 'owner')
-
-    # def save_model(self, request, obj, form, change):
-    #     obj.owner = request.user
-    #     return super(TagAdmin, self).save_model(request, obj, form, change)
+    list_display = ('name', 'status', 'created_time')
+    fields = ('name', 'status')
 
 
 class CategoryOwnerFilter(admin.SimpleListFilter):
@@ -94,6 +80,7 @@ class PostAdmin(BaseOwnerAdmin):
         'created_time', 'operator', 'owner'
     )  # 配置列表显示哪些字段
     list_display_links = []  # 配置哪些字段可以作为链接，点击可以进入编辑
+
     list_filter = [CategoryOwnerFilter, ]  # 配置页面过滤器，需要通过哪些字段过滤列表页
     search_fields = ['title', 'category_name']  # 配置搜索字段
     # save_on_top = True
@@ -124,7 +111,7 @@ class PostAdmin(BaseOwnerAdmin):
             ),
         }),
         ('额外信息', {
-            'classes': ('clooapse',),
+            'classes': ('wide',),
             'fields': ('tag',),
         })
     )

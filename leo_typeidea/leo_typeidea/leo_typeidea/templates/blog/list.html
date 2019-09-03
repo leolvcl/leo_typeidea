@@ -2,7 +2,7 @@
 {% block title%}
     {% if tag %}
         标签列表页:{{ tag.name }}
-    {% if category %}
+    {% elif category %}
         分类列表页:{{ category.name }}
     {% else %}
         首页
