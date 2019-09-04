@@ -5,7 +5,7 @@ from leo_typeidea.custom_site import custom_site
 from leo_typeidea.base_admin import BaseOwnerAdmin
 # Register your models here.
 @admin.register(Link,site=custom_site)
-class LinkAdmin(admin.ModelAdmin):
+class LinkAdmin(BaseOwnerAdmin):  # 9.4修改为BaseOwnerAdmin
     list_display = ('title', 'href', 'status', 'weight', 'created_time')
     fields = ('title', 'href', 'status', 'weight')
 
@@ -15,7 +15,7 @@ class LinkAdmin(admin.ModelAdmin):
 
 
 @admin.register(SideBar,site=custom_site)
-class SidebarAdmin(admin.ModelAdmin):
+class SidebarAdmin(BaseOwnerAdmin):  # 9.4修改为BaseOwnerAdmin
     list_display = ('title', 'display_type', 'content', 'created_time')
     fields = ('title', 'display_type', 'content')
 

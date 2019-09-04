@@ -1,35 +1,29 @@
 from django.contrib import admin
+from django.contrib.admin.models import LogEntry,CHANGE
 from django.urls import reverse
 from django.utils.html import format_html
 
-import requests
-from django.contrib.auth import get_permission_codename
-from .adminforms import PostAdminForm
+# import requests
+# from django.contrib.auth import get_permission_codename
+
 from .models import Post, Category, Tag
+from .adminforms import PostAdminForm
+from leo_typeidea.custom_site import custom_site
 from leo_typeidea.base_admin import BaseOwnerAdmin
-from leo_typeidea.custom_site import custom_site
 
-PERMISION_API = 'http://permision.sso.com/has_perm?user={}&perm_codO={}'
-
-from .models import Post, Category, Tag
-from .adminforms import PostAdminForm
-from leo_typeidea.custom_site import custom_site
-
+# PERMISION_API = 'http://permision.sso.com/has_perm?user={}&perm_codO={}'
 
 # Register your models here.
 
-from django.contrib.admin.models import LogEntry,CHANGE
-
-
 # 可选择集成自admin.StackedInline，获取不同样式
-class PostInline(admin.TabularInline):  # StackInline 样式不同
 
+class PostInline(admin.TabularInline,):  # StackInline 样式不同
     fields = ('title', 'desc')
     extra = 1  # 控制额外多几个
     model = Post
 
 
-@admin.register(Category)
+@admin.register(Category, site=custom_site)  # 此处9.4修改，新增site
 class CategoryAdmin(BaseOwnerAdmin):
     inlines = [PostInline, ]
     list_display = ('name', 'status', 'is_nav', 'created_time', 'post_count')
@@ -41,12 +35,9 @@ class CategoryAdmin(BaseOwnerAdmin):
 
     post_count.short_description = '文章数量'
 
-    # 通过给obj.owner赋值达到设置owner的目的，request.user为当前登录的用户，未登录时user是匿名用户对象
-    # form 是页面提交过来的表单之后的对象
-    # change 用于标记本次保存的数据是新增还是更新
 
 
-@admin.register(Tag)
+@admin.register(Tag,site=custom_site)  # 此处9.4新增site
 class TagAdmin(BaseOwnerAdmin):
     list_display = ('name', 'status', 'created_time')
     fields = ('name', 'status')
@@ -77,7 +68,7 @@ class PostAdmin(BaseOwnerAdmin):
     form = PostAdminForm
     list_display = (
         'title', 'category', 'status',
-        'created_time', 'operator', 'owner'
+        'created_time', 'owner', 'operator',
     )  # 配置列表显示哪些字段
     list_display_links = []  # 配置哪些字段可以作为链接，点击可以进入编辑
 
@@ -90,7 +81,7 @@ class PostAdmin(BaseOwnerAdmin):
 
     # 编辑页面
     save_on_top = True  # 保存编辑编辑并新建是否在顶部展示
-    exclude = ('owner',)  # 自动赋值当前用户
+    exclude = ['owner',]  # 自动赋值当前用户
     # fields = (
     #     ('category', 'title'),
     #     'desc', 'status', 'content', 'tag',
@@ -127,29 +118,13 @@ class PostAdmin(BaseOwnerAdmin):
 
     operator.short_description = '操作'  # 指定表头的展示方案
 
-    # def save_model(self, request, obj, form, change):
-    #     obj.owner = request.user
-    #     return super(PostAdmin, self).save_model(request, obj, form, change)
-    #
-    # def get_queryset(self, request):
-    #     qs = super(PostAdmin, self).get_queryset(request)
-    #     return qs.filter(owner=request.user)
 
     class Media:
         css = {
             'all': ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',),
         }
         js = ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js')
-    # 添加用户权限
-    # def has_add_permission(self, request):
-    #     opts = self.opts
-    #     codename = get_permission_codename('add', opts)
-    #     perm_code = '{}.{}'.format(opts.app_label, codename)
-    #     resp = requests.get(PERMISION_API.format(request.user.username, perm_code))
-    #     if resp.status_code == 200:
-    #         return True
-    #     else:
-    #         return False
+
 
 @admin.register(LogEntry,site=custom_site)
 class LogEntryAdmin(admin.ModelAdmin):
@@ -160,3 +135,26 @@ class LogEntryAdmin(admin.ModelAdmin):
         'user',
         'change_message',
     ]
+
+
+    # 通过给obj.owner赋值达到设置owner的目的，request.user为当前登录的用户，未登录时user是匿名用户对象
+    # form 是页面提交过来的表单之后的对象
+    # change 用于标记本次保存的数据是新增还是更新
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     return super(PostAdmin, self).save_model(request, obj, form, change)
+    #
+    # def get_queryset(self, request):
+    #     qs = super(PostAdmin, self).get_queryset(request)
+    #     return qs.filter(owner=request.user)
+
+    # 添加用户权限
+    # def has_add_permission(self, request):
+    #     opts = self.opts
+    #     codename = get_permission_codename('add', opts)
+    #     perm_code = '{}.{}'.format(opts.app_label, codename)
+    #     resp = requests.get(PERMISION_API.format(request.user.username, perm_code))
+    #     if resp.status_code == 200:
+    #         return True
+    #     else:
+    #         return False

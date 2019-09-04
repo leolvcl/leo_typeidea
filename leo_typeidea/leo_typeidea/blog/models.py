@@ -99,6 +99,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, verbose_name="分类", on_delete=models.DO_NOTHING)
     owner = models.ForeignKey(User, verbose_name='作者')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+
     pv = models.PositiveIntegerField(default=1)
     uv = models.PositiveIntegerField(default=1)
 
@@ -130,7 +131,8 @@ class Post(models.Model):
             category = None
             post_list = []
         else:
-            post_list = category.post_set.filter(status=Post.STATUS_NORMAL).select_related('owner', 'category')
+            post_list = category.post_set.filter(status=Post.STATUS_NORMAL)\
+                .select_related('owner', 'category')
 
         return post_list, category
 
