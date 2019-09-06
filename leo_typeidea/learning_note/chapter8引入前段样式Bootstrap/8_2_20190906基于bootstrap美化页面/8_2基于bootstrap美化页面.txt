@@ -1,0 +1,26 @@
+8.2.1 增加themes目录
+    setting、同级目录下新增themes/default目录，将templates目录拷贝至目录下面
+    修改setting中base文件
+8.2.2 修改模板
+8.3 配置线上静态资源
+    8.3.1 内联css和外联css
+        1. 内联css
+            <style>
+                .post {
+                    margin-bottom:5px  // 配置每个post卡片下面的间隔
+                }
+            </style>
+        2. 外联css
+            1. 便于独立开发，跟页面解耦
+            2. 便于版本管理
+    8.3.2 django中的静态资源
+        在INSTALLED-APPS中增加django.contrib.staticfile这个app来增加静态文件访问的功能
+        setting中配置：
+            THEMES = 'bootstrap'
+            STATIC_ROOT = '/tmp/static'  # 配置部署后的静态资源路径,django提供collectionstatic命令来收集所有静态资源到此路径下，
+                                         # 然后即可以通过nginx来配置静态资源路径了
+            STATIC_URL = '/static/'      # 配置页面上静态资源的起始路径
+            STATICFILE_DIR = [           # 指定静态资源所在的目录
+                os.path.join(BASE_DIR, 'themes', THEMES, 'static')
+            ]
+    8.3.3 在模板中使用静态资源

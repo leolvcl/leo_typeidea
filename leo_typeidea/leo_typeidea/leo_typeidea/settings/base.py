@@ -15,16 +15,13 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'a)f+x65pq2q^k-l$ac^75m#hvcwr)xysxvgxi5gi64w0qrsmhd'
 
-
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -53,10 +50,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'leo_typeidea.urls'
 
+# THEMES = 'default'
+THEMES = 'bootstrap'
+STATIC_ROOT = '/tmp/static'  # 配置部署后的静态资源路径,django提供collectionstatic命令来收集所有静态资源到此路径下，
+                             # 然后即可以通过nginx来配置静态资源路径了
+STATIC_URL = '/static/'      # 配置页面上静态资源的起始路径
+STATICFILE_DIR = [           # 指定静态资源所在的目录
+    os.path.join(BASE_DIR, 'themes', THEMES, 'static')
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'themes', THEMES, 'templates')],  # 0906新增
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,9 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'leo_typeidea.wsgi.application'
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -92,7 +95,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -105,7 +107,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

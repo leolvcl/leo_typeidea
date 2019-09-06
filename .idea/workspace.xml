@@ -2,10 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3ef7a0-03a2-4b7f-9148-47605507b91f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter8引入前段样式Bootstrap/8_1_20190904bootstrap的基本用法/8_1_bootstrap的基本用法.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter8引入前段样式Bootstrap/8_1_20190904bootstrap的基本用法/demo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter8引入前段样式Bootstrap/8_1_20190904bootstrap的基本用法/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter8引入前段样式Bootstrap/8_2_20190906基于bootstrap美化页面/8_2基于bootstrap美化页面.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/static/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/config/links.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default/templates/blog/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default/templates/blog/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default/templates/blog/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default/templates/config/blocks/sidebar_comments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default/templates/config/blocks/sidebar_posts.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default/templates/config/links.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/templates/blog/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/blog/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/templates/blog/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/blog/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/templates/blog/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/blog/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/templates/config/blocks/sidebar_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/config/blocks/sidebar_comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/templates/config/blocks/sidebar_posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/config/blocks/sidebar_posts.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,11 +54,15 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/leo_typeidea/leo_typeidea/manage.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default" />
       <recent name="$PROJECT_DIR$/leo_typeidea/learning_note/chapter6开发管理后台" />
       <recent name="$PROJECT_DIR$/leo_typeidea/leo学习日记/0831_numba" />
       <recent name="$PROJECT_DIR$/leo_typeidea/learning_note/20190829_5_34_Model层介绍" />
@@ -251,7 +267,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/base.py</url>
-          <line>32</line>
+          <line>29</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
