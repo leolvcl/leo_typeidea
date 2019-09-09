@@ -7,8 +7,10 @@
 <body>
     <ul>
         {% for comment in comments %}
-        <li><a href="{% url 'post-detail' comment.target_id %}'">{{ comment.target.title }}</a></li>
+        <li><a href="{% comment.target %}'">{{ comment.target.title }}</a></li>
+        % autoescape off %}  # 关闭django模板的自动转码功能
         {{ comment.nickname }}:{{ comment.content }}
+        {% endautoescape %}
         {% endfor %}
     </ul>
 </body>

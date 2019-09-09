@@ -1,11 +1,7 @@
 {% extends "./base.html" %}
+{% load comment_block %}
 {% block title%}
     {{ post.title }}
-{% endblock %}
-
-{% block extra_head %}
-<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/googlecode.min.css">
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 {% endblock %}
 
 {% block main%}
@@ -24,12 +20,12 @@
     <div class="comment">
         <form class="form-group" action="/comment/", method="post">
             {% csrf_token %}
-            <input name="target" type="hidden" value="{{ request.path }}">
+            <input name="target" type="hidden" value="{{ target }}">
             {{ comment_form }}
             <input type="submit" value="写好了">
         </form>
 
-        <!--        评论列表-->
+        <!--评论列表-->
         <ul class="list-group">
             {% for comment in comment_list %}
             <li class="list-group-item">
@@ -42,8 +38,8 @@
                     </span>
                 </div>
                 <div class="comment-content">
-                    {% autoescape off %}
-                    {{ comment.content_html }}
+                    {% autoescape off %}  # 关闭django模板的自动转码功能
+                    {{ comment.content }}
                     {% endautoescape %}
                 </div>
             </li>

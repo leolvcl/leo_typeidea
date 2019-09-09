@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.functional import cached_property
+
+import mistune
 
 
 # Create your models here.
@@ -100,6 +103,8 @@ class Post(models.Model):
     owner = models.ForeignKey(User, verbose_name='作者')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
 
+    content_html = models.TextField(verbose_name='正文html代码', blank=True, editable=False)  # 此字段不需要人为处理
+
     pv = models.PositiveIntegerField(default=1)
     uv = models.PositiveIntegerField(default=1)
 
@@ -131,7 +136,7 @@ class Post(models.Model):
             category = None
             post_list = []
         else:
-            post_list = category.post_set.filter(status=Post.STATUS_NORMAL)\
+            post_list = category.post_set.filter(status=Post.STATUS_NORMAL) \
                 .select_related('owner', 'category')
 
         return post_list, category
@@ -143,3 +148,11 @@ class Post(models.Model):
     @classmethod
     def hot_posts(cls):
         return Post.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')
+
+    def save(self, *args, **kwargs):
+        self.content_html = mistune.markdown(self.content)
+        super().save(*args, **kwargs)
+
+    @cached_property  # 将返回的数据绑定到实例上
+    def tags(self):
+        return ','.join(self.tag.values_list('name', flat=True))
