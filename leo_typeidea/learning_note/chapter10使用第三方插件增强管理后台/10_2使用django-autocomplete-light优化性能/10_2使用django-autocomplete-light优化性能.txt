@@ -1,0 +1,47 @@
+admin和xadmin在关联大量数据时，会产生问题
+10.2.1 创造一万个分类
+    python manage.py shell
+
+    from blog.model import Category
+    from django.contrib.auth.models import User
+    user = User.objects.all().first()
+    Category.objects.bulk_create([
+        Category(name='cate%s'%i,owner=user) for i in range(10000)
+    ])
+10.2.2 django-autocomplete-light介绍
+    轻量级自动补全插件，即懒加载。外键关联数不会随着页面加载而加载，只会在输入后再进行搜索
+    django2.0内置类似方法
+    原理：
+        1. 封装好一个接口，用来查询要处理的数据
+        2. 提供一个前端组件
+        3. 用户输入数据，实时接口查询
+        4. 拿到数据，展示到页面上供用户选择
+10.2.3 引入插件
+    1. pip install django-autocomplete-light==3.2.10
+    2. INSTALLED_APPS 中新增 [ 'dal', 'dal_select2',]
+    3. 配置后端查询逻辑
+        1. 新建autocomplete.py用来配置所有需要自动补全的接口
+        2. 用户未登录，则返回空的queryset
+        3. 获取该用户创建的所有分类或者标签
+        4. 判断是否存在self.q 这里的q是url参数传递过来的值
+    4. 配置url
+    5. 配置展示逻辑 adminforms.py
+        from dal import autocomplete
+        from django import forms
+        from .models import Category, Tag, Post
+        class PostAdminForm(forms.ModelForm):
+            desc = forms.CharField(widget=forms.Textarea, label='摘要', required=False)
+            category = forms.ModelChoiceField(
+                queryset=Category.objects.all(),
+                widget=autocomplete.ModelSelect2(url='category-autocomplete'),
+                label='分类'
+            )
+            tag = forms.ModelChoiceField(
+                queryset=Tag.objects.all(),
+                widget=autocomplete.ModelSelect2Multiple(url='tag-autocomplete'),
+                label='标签'
+            )
+            class Meta:
+                model = Post
+                fields = ('category', 'tag', 'title', 'desc', 'content', 'status')
+
