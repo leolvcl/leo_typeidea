@@ -1,0 +1,68 @@
+10.1.1 特性
+    用法
+        1. 无痛替换django自带admin
+        2. bootstrap前段效果组件
+        3. 灵活的插件机制
+        4. 更好用的过滤功能
+        5. 多种类型的数据导出功能
+        6. 可自定义书签
+10.1.2 安装最新的xadmin代码
+    pip install git+https://github.com/sshwsfc/xadmin@697a658
+        697a658是xadmin项目最新的项目提交
+    pip install https://github.com/the5fire/django-xadmin/archive/0.6.1.tar.gz
+10.1.3 admin替换为xadmin
+    1. 配置INSTALLED_APP,新增'xadmin', 'crispy_forms'
+    2. 迁移数据库
+    3. 将app下的admin改名为adminx
+    4. 修改ModelAdmin的集成对象为object或者去掉，xadmin不支持多个site的配置，故之前自定义的site无法使用
+10.1.4 fieldset替换为FieldSet
+10.1.5 静态资源Media配置
+    class PostAdmin(BaseOwnerAdmin):
+        @property
+        def media(self):
+            # xadmin基于bootstrap，引入会导致页面样式冲突，只做演示
+            media = super().media
+            media.add_js(['https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js'])
+            media.add_css({
+                'all': ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',),
+            })
+            return media
+10.1.6 自定义过滤器
+    1. 修改CategoryOwnerFilter(RelatedFieldListFilter):
+        @classmethod
+        def test(cls, field, request, params, model, admin_view, field_path):
+            # 确定字段是否需要被当前的过滤器处理
+            return field.name == 'category'
+
+        def __init__(self,field, request, params, model, admin_view, field_path):
+            super().__init__(field, request, params, model, admin_view, field_path)
+            # 重新获取lookup_choice 根据owner过滤
+            self.lookup_choices = Category.objects.flter(owner=request.user).values_list('id', 'name')
+    manager.register(CategoryOwnerFilter,take_priority=True)
+    2. 对reverse进行调整
+        return format_html(
+            '<a href="{}">编辑</a>',
+            reverse('xadmin:blog_post_change', args=(obj.id,))
+        )
+    3. 修改注册的装饰器
+        将@admin.register(Category,site=custom_site)替换为@xadmin.sites.register(Category)，去掉site参数
+10.1.7 数据处理上的差异
+    1. get_queryset(self, request)                  ——>     get_list_queryset(self)
+    2. save_model(self, request, obj, form, change) ——>     save_models(self)
+    3. 左边是django admin的方法，在xadmin中需要参数传递的数据都可以通过self对象获取，如self.request和self.org_obj获取修改之前的数据对象
+    4. 修改BaseOwnerAdmin代码
+10.1.8 处理inline
+    将fields修改为form_layout
+        class PostInline:  # StackInline 样式不同
+            form_layout = (
+                Container(
+                    Row('title','desc')
+                )
+            )
+            # fields = ('title', 'desc')
+10.1.9 site title和site footer的处理
+    setting/base.py下添加：
+        XADMIN_TITLE = 'leo_typeidea管理后台'
+        XADMIN_FOOTER_TITLE = 'power by leolvcl.com'
+10.1.10 去掉django admin自带的log配置
+    注释掉admin.py中LogEntryAdmin的代码

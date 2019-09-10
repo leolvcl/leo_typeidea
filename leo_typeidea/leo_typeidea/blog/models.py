@@ -28,7 +28,7 @@ class Category(models.Model):
     # 配置类的__str__方法
     def __str__(self):
         return self.name
-
+    #
     # @classmethod
     # def get_navs(cls):
     #     '''
@@ -43,25 +43,25 @@ class Category(models.Model):
     #         'nav':nav_categories,
     #         'categories':normal_categories
     #     }
-    # @classmethod
-    # def get_navs(cls):
-    #     '''
-    #     获取所有的分类，并且区分是否为导航
-    #     只进行一次数据库查询
-    #     :return:
-    #     '''
-    #     categories = cls.objects.filter(status=cls.STATUS_NORMAL)
-    #     nav_categories = []
-    #     normal_categories = []
-    #     for cate in categories:
-    #         if cate.is_nav:
-    #             nav_categories.append(cate)
-    #         else:
-    #             normal_categories.append(cate)
-    #     return {
-    #         'nav': nav_categories,
-    #         'categories': normal_categories
-    #     }
+    @classmethod
+    def get_navs(cls):
+        '''
+        获取所有的分类，并且区分是否为导航
+        只进行一次数据库查询
+        :return:
+        '''
+        categories = cls.objects.filter(status=cls.STATUS_NORMAL)
+        nav_categories = []
+        normal_categories = []
+        for cate in categories:
+            if cate.is_nav:
+                nav_categories.append(cate)
+            else:
+                normal_categories.append(cate)
+        return {
+            'navs': nav_categories,
+            'categories': normal_categories
+        }
 
 
 class Tag(models.Model):
@@ -153,6 +153,6 @@ class Post(models.Model):
         self.content_html = mistune.markdown(self.content)
         super().save(*args, **kwargs)
 
-    @cached_property  # 将返回的数据绑定到实例上
-    def tags(self):
-        return ','.join(self.tag.values_list('name', flat=True))
+    # @cached_property  # 将返回的数据绑定到实例上
+    # def tags(self):
+    #     return ','.join(self.tag.values_list('name', flat=True))
