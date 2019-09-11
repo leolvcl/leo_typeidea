@@ -30,12 +30,14 @@ INSTALLED_APPS = [
     'blog',
     'config',
     'comment',
+
     'xadmin',
     'crispy_forms',
     'dal',
     'dal_select2',
     'ckeditor',
     'ckeditor_uploader',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,6 +135,6 @@ CKEDITOR_CONFIGS = {
     },
 }
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = 'article_images'
 DEFAULT_FILE_STORAGE = 'leo_typeidea.storage.WatermarkStorage'

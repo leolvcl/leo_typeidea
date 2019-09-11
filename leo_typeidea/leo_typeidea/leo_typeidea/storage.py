@@ -13,6 +13,7 @@ class WatermarkStorage(FileSystemStorage):
             # 加水印
             image = self.watermark_with_text(content, 'leolvcl', 'red')
             content = self.convert_image_to_file(image, name)
+        return super().save(name, content, max_length=max_length)
 
     def convert_image_to_file(self, image, name):
         temp = BytesIO()
@@ -31,6 +32,6 @@ class WatermarkStorage(FileSystemStorage):
             font = None
         textWidth, textHeight = draw.textsize(text, font)
         x = (width - textWidth - margin) / 2  # 计算横轴位置
-        y = (height - textHeight - margin) / 2  # 计算纵轴位置
+        y = (height - textHeight - margin)  # 计算纵轴位置
         draw.text((x, y), text, color, font)
         return image

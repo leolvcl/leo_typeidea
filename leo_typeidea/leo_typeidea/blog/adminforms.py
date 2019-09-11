@@ -12,7 +12,7 @@ class PostAdminForm(forms.ModelForm):
         widget=autocomplete.ModelSelect2(url='category-autocomplete'),
         label='分类'
     )
-    tag = forms.ModelChoiceField(
+    tag = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
         widget=autocomplete.ModelSelect2Multiple(url='tag-autocomplete'),
         label='标签'
@@ -20,7 +20,7 @@ class PostAdminForm(forms.ModelForm):
     content_ck = forms.CharField(widget=CKEditorUploadingWidget(), label='正文', required=False)
     content_md = forms.CharField(widget=forms.Textarea(), label='正文', required=False)
     content = forms.CharField(
-        widget=CKEditorUploadingWidget(), label='正文', required=True,
+        widget=forms.HiddenInput(), required=True,
     )
 
     class Meta:
@@ -29,14 +29,14 @@ class PostAdminForm(forms.ModelForm):
                   'is_md', 'content', 'content_md',
                   'content_ck', 'status')
 
-    def __init__(self,instance=None,initial=None,**kwargs):
+    def __init__(self, instance=None, initial=None, **kwargs):
         initial = initial or {}
         if instance:
             if instance.is_md:
                 initial['content_md'] = instance.content
             else:
                 initial['content_ck'] = instance.content
-        super().__init__(instance=instance,initial=initial,**kwargs)
+        super().__init__(instance=instance, initial=initial, **kwargs)
 
     def clean(self):
         is_md = self.cleaned_data.get('is_md')
@@ -46,10 +46,10 @@ class PostAdminForm(forms.ModelForm):
             content_field_name = 'content_ck'
         content = self.cleaned_data.get(content_field_name)
         if not content:
-            self.add_error(content_field_name,'必填项')
+            self.add_error(content_field_name, '必填项')
             return
         self.cleaned_data['content'] = content
         return super().clean()
 
-    class Meta:
+    class Media:
         js = ('js/post_editor.js',)

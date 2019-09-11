@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3ef7a0-03a2-4b7f-9148-47605507b91f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter10使用第三方插件增强管理后台/10_3使用django-ckeditor开发富文本编辑器/10_3使用django-ckeditor开发富文本编辑器.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/storage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/static/js/post_editor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0003_auto_20190911_2120.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminforms.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminforms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/adminx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/adminx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/base_admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/base_admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/custom_site.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/storage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -260,7 +267,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/views.py</url>
-          <line>22</line>
+          <line>17</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
