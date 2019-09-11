@@ -1,8 +1,8 @@
 from django.contrib import admin
-from django.contrib.admin.models import LogEntry,CHANGE
+from django.contrib.admin.models import LogEntry, CHANGE
 from django.urls import reverse
 from django.utils.html import format_html
-from xadmin.layout import Row, Fieldset,Container
+from xadmin.layout import Row, Fieldset, Container
 from xadmin.filters import manager, RelatedFieldListFilter
 import xadmin
 # import requests
@@ -13,6 +13,7 @@ from .adminforms import PostAdminForm
 from leo_typeidea.custom_site import custom_site
 from leo_typeidea.base_admin import BaseOwnerAdmin
 
+
 # PERMISION_API = 'http://permision.sso.com/has_perm?user={}&perm_codO={}'
 
 # Register your models here.
@@ -22,7 +23,7 @@ from leo_typeidea.base_admin import BaseOwnerAdmin
 class PostInline:  # StackInline 样式不同
     form_layout = (
         Container(
-            Row('title','desc')
+            Row('title', 'desc')
         )
     )
     # fields = ('title', 'desc')
@@ -41,7 +42,6 @@ class CategoryAdmin(BaseOwnerAdmin):
         return obj.post_set.count()
 
     post_count.short_description = '文章数量'
-
 
 
 @xadmin.sites.register(Tag)
@@ -79,7 +79,9 @@ class CategoryOwnerFilter(RelatedFieldListFilter):
         # 重新获取lookup_choice 根据owner过滤
         self.lookup_choices = Category.objects.filter(owner=request.user).values_list('id', 'name')
 
-manager.register(CategoryOwnerFilter,take_priority=True)
+
+manager.register(CategoryOwnerFilter, take_priority=True)
+
 
 @xadmin.sites.register(Post)
 class PostAdmin(BaseOwnerAdmin):
@@ -100,7 +102,7 @@ class PostAdmin(BaseOwnerAdmin):
 
     # 编辑页面
     save_on_top = True  # 保存编辑编辑并新建是否在顶部展示
-    exclude = ['owner',]  # 自动赋值当前用户
+    exclude = ['owner', ]  # 自动赋值当前用户
     # fields = (
     #     ('category', 'title'),
     #     'desc', 'status', 'content', 'tag',
@@ -109,7 +111,7 @@ class PostAdmin(BaseOwnerAdmin):
     form_layout = (
         Fieldset(
             '基础信息',
-            Row('title','category'),
+            Row('title', 'category'),
             'status',
             'tag',
         ),
@@ -117,8 +119,12 @@ class PostAdmin(BaseOwnerAdmin):
             '内容信息',
             'desc',
             'content',
+            'content_ck',
+            'content_md',
+            'content',
         )
     )
+
     #  控制页面布局
     # fieldsets = (
     #     ('基础配置', {
@@ -157,6 +163,7 @@ class PostAdmin(BaseOwnerAdmin):
         #     self.model_admin_url('change', obj.id),
         #     # reverse('xadmin:blog_post_change', args=(obj.id,))
         # )
+
     operator.short_description = '操作'  # 指定表头的展示方案
 
     # @property
@@ -175,7 +182,6 @@ class PostAdmin(BaseOwnerAdmin):
     #     }
     #     js = ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js')
 
-
 # @xadmin.sites.register(LogEntry)
 # class LogEntryAdmin(admin.ModelAdmin):
 #     list_display = [
@@ -187,24 +193,24 @@ class PostAdmin(BaseOwnerAdmin):
 #     ]
 
 
-    # 通过给obj.owner赋值达到设置owner的目的，request.user为当前登录的用户，未登录时user是匿名用户对象
-    # form 是页面提交过来的表单之后的对象
-    # change 用于标记本次保存的数据是新增还是更新
-    # def save_model(self, request, obj, form, change):
-    #     obj.owner = request.user
-    #     return super(PostAdmin, self).save_model(request, obj, form, change)
-    #
-    # def get_queryset(self, request):
-    #     qs = super(PostAdmin, self).get_queryset(request)
-    #     return qs.filter(owner=request.user)
+# 通过给obj.owner赋值达到设置owner的目的，request.user为当前登录的用户，未登录时user是匿名用户对象
+# form 是页面提交过来的表单之后的对象
+# change 用于标记本次保存的数据是新增还是更新
+# def save_model(self, request, obj, form, change):
+#     obj.owner = request.user
+#     return super(PostAdmin, self).save_model(request, obj, form, change)
+#
+# def get_queryset(self, request):
+#     qs = super(PostAdmin, self).get_queryset(request)
+#     return qs.filter(owner=request.user)
 
-    # 添加用户权限
-    # def has_add_permission(self, request):
-    #     opts = self.opts
-    #     codename = get_permission_codename('add', opts)
-    #     perm_code = '{}.{}'.format(opts.app_label, codename)
-    #     resp = requests.get(PERMISION_API.format(request.user.username, perm_code))
-    #     if resp.status_code == 200:
-    #         return True
-    #     else:
-    #         return False
+# 添加用户权限
+# def has_add_permission(self, request):
+#     opts = self.opts
+#     codename = get_permission_codename('add', opts)
+#     perm_code = '{}.{}'.format(opts.app_label, codename)
+#     resp = requests.get(PERMISION_API.format(request.user.username, perm_code))
+#     if resp.status_code == 200:
+#         return True
+#     else:
+#         return False

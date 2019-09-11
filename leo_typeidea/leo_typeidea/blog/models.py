@@ -108,6 +108,8 @@ class Post(models.Model):
     pv = models.PositiveIntegerField(default=1)
     uv = models.PositiveIntegerField(default=1)
 
+    is_md = models.BooleanField(default=False, verbose_name='markdown语法')
+
     class Meta:
         verbose_name = verbose_name_plural = '文章'
         ordering = ['-id']  # 根据id降序排列
@@ -150,7 +152,10 @@ class Post(models.Model):
         return Post.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')
 
     def save(self, *args, **kwargs):
-        self.content_html = mistune.markdown(self.content)
+        if self.is_md:
+            self.content_html = mistune.markdown(self.content)
+        else:
+            self.content_html = self.content
         super().save(*args, **kwargs)
 
     # @cached_property  # 将返回的数据绑定到实例上

@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'dal',
     'dal_select2',
+    'ckeditor',
+    'ckeditor_uploader',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'leo_typeidea.urls'
 # THEMES = 'default'
 THEME = 'bootstrap'
 STATIC_ROOT = '/tmp/static'  # 配置部署后的静态资源路径,django提供collectionstatic命令来收集所有静态资源到此路径下，
-                             # 然后即可以通过nginx来配置静态资源路径了
+# 然后即可以通过nginx来配置静态资源路径了
 
 
 TEMPLATES = [
@@ -113,10 +115,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'      # 配置页面上静态资源的起始路径
-STATICFILES_DIRS = [           # 指定静态资源所在的目录
+STATIC_URL = '/static/'  # 配置页面上静态资源的起始路径
+STATICFILES_DIRS = [  # 指定静态资源所在的目录
     os.path.join(BASE_DIR, 'themes', THEME, 'static')
 ]
 
 XADMIN_TITLE = 'leo_typeidea管理后台'
 XADMIN_FOOTER_TITLE = 'power by leolvcl.com'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 800,
+        'tabSpaces': 4,
+        'extraPlugins': 'codesnippet'  # 配置代码插件
+    },
+}
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+CKEDITOR_UPLOAD_PATH = 'article_images'
+DEFAULT_FILE_STORAGE = 'leo_typeidea.storage.WatermarkStorage'

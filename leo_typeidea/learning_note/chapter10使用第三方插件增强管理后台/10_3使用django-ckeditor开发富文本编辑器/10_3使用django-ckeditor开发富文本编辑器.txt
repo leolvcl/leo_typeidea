@@ -1,0 +1,59 @@
+10.3.1 基础配置
+    原理：
+        通过前端实现，通过某种方式实现一个新的编辑器界面来替换原有的编辑器，但是又能实时把比阿尼额的内容同步到我们的编辑器中
+    1. 安装
+        pip install django-ckeditor==5.4.0
+    2. 配置INSTALLED_APP
+        'ckeditor',
+    3. 配置form中content字段
+        from ckeditor.widgets import CKEditorWidget
+        content = forms.CharField(widget=CKEditorWidget(), label='正文', required=True)
+    4. setting中新增配置
+        CKEDITOR_CONFIGS = {
+            'default': {
+                'toolbar': 'full',
+                'height': 300,
+                'width': 800,
+                'tabSpaces': 4,
+                'extraPlugins': 'codesnippet'  # 配置代码插件
+            },
+        }
+10.3.2 配置图片
+    原理：
+        1. web端，有一个添加文件的组件，即type为file的input标签
+        2. 通过提交form或ajax的方式把数据发送到服务器接口上
+        3. 服务器需要个接口来接受数据
+        4. 接口拿到数据后，将数据存在本地或着网络磁盘（又拍云或者七牛）
+        5. 存储完毕后会有个地址（如果是本地地址，需要转换为网络可以访问的地址，可用nginx代理）
+        6. 将文章地址存到对应位置
+10.3.3 上传图片配置
+    1. 配置INSTALLED_APP,新增
+       'ckeditor_uploader',
+    2. 将blog/adminforms.py中content改为下面这样，支持图片上传功能。
+        content = forms.CharField(
+            widget=CKEditorUploadingWidget(),label='正文',required=True,
+        )
+    3. 配置上传的路径
+        setting中增加:
+            MEDIA_URL = '/media/'
+            MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+            CKEDITOR_UPLOAD_PATH = 'article_images'
+    4. 配置接收文件的接口
+        使用django-ckeditor提供的功能
+        [...
+         url(r'^ckeditor/',include('ckeditor_upload.urls')),
+        ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    5. pip install pillow==5.1.0
+10.3.4 自定义存储以及水印
+    基于django提供的Storage重写save方法
+    代码见storage.py
+        1. from PIL import Image, ImageDraw, ImageFont
+        2. 新增convert_image_to_file、watermark_with_text两个方法
+        3. convert_image_to_file将打上水印的图片对象转换为文件对象
+        4. watermark_with_text的作用是加水印
+        5. 在setting中修改代码加上DEFAULT_FILE_STORAGE = 'leo_typeidea.storage.WatermarkStorage'
+10.3.5 markdown和django-ckeditor共存
+    1. Post中新增字段：
+        is_md = models.BooleanField(default=False, verbose_name='markdown语法')
+    2. 修改save
+    3. 修改blog/adminforms.py的代码

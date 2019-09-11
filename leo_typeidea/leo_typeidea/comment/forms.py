@@ -1,5 +1,6 @@
 from django import forms
 import mistune
+from ckeditor.widgets import CKEditorWidget
 
 from .models import Comment
 
@@ -23,23 +24,25 @@ class CommentForm(forms.ModelForm):
         label='网站',
         max_length=100,
         widget=forms.widgets.URLInput(
-            attrs={'class':'form-control','style':"width: 60%"}
+            attrs={'class': 'form-control', 'style': "width: 60%"}
         )
     )
-    content = forms.CharField(
-        label='内容',
-        max_length=500,
-        widget=forms.widgets.Textarea(
-            attrs={'rows':6,'cols':60,'class':'form-control'}
-        )
-    )
+    # content = forms.CharField(
+    #     label='内容',
+    #     max_length=500,
+    #     widget=forms.widgets.Textarea(
+    #         attrs={'rows':6,'cols':60,'class':'form-control'}
+    #     )
+    # )
+    content = forms.CharField(widget=CKEditorWidget(), label='正文', required=True)
+
     def clean_content(self):
         content = self.cleaned_data.get('content')
         if len(content) < 10:
             raise forms.ValidationError('内容长度过短')
-        content - mistune.markdown(content)  # 转换成markdown格式
+        content = mistune.markdown(content)  # 转换成markdown格式
         return content
 
     class Meta:
         model = Comment
-        fields = ['nickname','email','website','content']
+        fields = ['nickname', 'email', 'website', 'content']
