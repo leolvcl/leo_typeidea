@@ -1,0 +1,41 @@
+rest风格
+    把所有请求的实体当做资源，通过http自带的方法来进行对应的增删改查操作
+    1. 直观简短的资源地址
+    2. 传输的资源
+    3. 对资源的操作
+11.1 接口需求及drf介绍
+    需求：
+        1. 最新的文章列表
+        2. 分类列表
+        3. 根据分类获取文章
+        4. 标签列表
+        5. 根据标签获取文章
+11.1.1 快速上手
+    1. 安装
+        pip install django-rest-framework==3.8.2
+    2. 'rest_framework',放在INSTALLED_APPS 中
+    3. 编写serializers.py文件
+    4. 配置url ，输入127.0.0.1:8000/api/post/?format=json
+        url(r'^api/post/', PostList.as_view(), name='post-list'),
+        如果不加?format=json,会默认渲染为页面
+    5. @api_view()是用来把view转换为API view的装饰器，提供可选参数['GET','POST']来限定请求类型
+    6. generics.ListCreateAPIView和前面的ListView类似，只需指定QuerySet，配置好用来序列化的类serializer_class = PostSerializer
+        就可以实现一个数据列表页，另一个ListAPIView仅支持get请求
+    7.  viewsets.ModelViewSet           可读写
+        viewsets.ReadOnlyModelViewSet   只读
+        ps： 如果需要可读写的接口，还需要在写入端增加CSRF_TOKEN的获取，可参考django文档csrf上ajax部分
+    8. url.py中
+        from rest_framework.routers import DefaultRouter
+        router = DefaultRouter()
+        router.register(r'post',PostViewSet,base_name='api-post')
+            url(r'^api/', include(router.urls,namespace='api')),
+        如果需要进行reverse操作，可以通过reverse('api:post-list')获取到文章列表的接口，通过reverse('api:post-detail',args=[1])
+            获取对应的文章详细接口
+        可在PostViewSet中的某个方法中使用self.reverse_action('list')获取对应的接口，但是如果url中配置了namespace则不可以使用
+            reverse_action，因为drf不支持namespace的reverse_action
+11.1.2 配置api docs
+    1. 安装依赖
+        pip install coreapi==2.3.3
+    2. 在urls.py中添加
+        from rest_framework.documentation import include_docs_urls
+        url(r'^api/docs/',include_docs_urls(title='leo_typeidea apis')),

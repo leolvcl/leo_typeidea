@@ -2,23 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3ef7a0-03a2-4b7f-9148-47605507b91f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/migrations/0003_auto_20190911_2120.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter11使用django-rest-framework/11_1接口需求及drf介绍/11_1接口需求及drf介绍.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/apis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/apis_bk.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminforms.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminforms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/adminx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/adminx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/comment/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/adminx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/config/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/base_admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/base_admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/custom_site.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/storage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leo_typeidea/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,21 +46,22 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/blog" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/blog" />
-      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/static/css" />
-      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/leo_typeidea/learning_note/chapter9完成整个博客系统" />
       <recent name="$PROJECT_DIR$/leo_typeidea/learning_note/chapter9完成整个博客系统/9_1_20190907增加搜索和作者过滤/9_2_增加友链页面" />
       <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/default" />
       <recent name="$PROJECT_DIR$/leo_typeidea/learning_note/chapter6开发管理后台" />
       <recent name="$PROJECT_DIR$/leo_typeidea/leo学习日记/0831_numba" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/blog" />
+      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/templates/blog" />
+      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap/static/css" />
+      <recent name="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/themes/bootstrap" />
     </key>
   </component>
   <component name="RunDashboard">
