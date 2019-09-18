@@ -1,0 +1,18 @@
+12.3.1 快速配置silk
+    1. pip install django-silk==3.0.0
+    2. develop配置
+        INSTALLED_APPS += [
+            'silk',
+        ]
+        MIDDLEWARE += [
+            'silk.middleware.SilkyMiddleware',
+        ]
+    3. url配置
+        if settings.DEBUG:
+            urlpatterns += [
+                url(r'^silk/',include('silk.urls',namespace='silk')),
+            ]
+    4.  python manage.py migrate
+    5. 启动项目
+12.3.2 配置profiling
+    修改blog/views.py

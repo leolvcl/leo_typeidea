@@ -1,0 +1,48 @@
+12.1.1 调试手段
+    1. print大法
+        如需打印json或者dict格式的数据可以使用pprint.pprint
+    2. logging模块
+        使用见easy_logging.py
+        参数含义：
+            version:    固定值1
+            formatters: 格式化设置输出内容
+            handlers:   处理要打印的日志内容，可以设定输出到文件还是输出到stream（控制台）
+            loggers:    定义不同的logger名称、对应级别以及有哪些handler，key为''的logger是默认的logger
+    3. pdb ‘大法’
+        代码见pdb01.py
+        可以跟踪程序执行流程，观察其中的问题所在
+        执行到import pdb;pdb.set_trace()时停止程序进入pdb交互模式
+        也可以使用python -m pdb hello.py进入交互模式
+        常用指令：
+            n   next执行当前语句，指向下一行语句
+            s   step in 跳入某个执行函数中
+            c   continue 恢复执行状态
+            l   list 列出当前要执行 语句的上下代码
+            ll  long list展示当前函数的所有代码
+            r   return 直接执行到返回结果的部分
+            q   quit退出pdb
+            h   h <指令>查看对应指令的意思
+12.1.2 调优手段
+    1. 手工timer
+        简单版：
+            t1 = time.time()
+            use_time = time.time() - t1
+        改进版——装饰器：
+            def time_it(func):
+                def wrapper(*args,**kwargs):
+                    start = time.time()
+                    result = func(*args,**kwargs)
+                    print(func.__name__,'cost',time.time()-start)
+                    return result
+                return wrapper
+    2. profile/cProfile
+        1.使用见profile01.py
+            各项含义：
+                ncalls          执行次数
+                tottime         总执行时间（排除子函数的执行时间）
+                percall         平均每次执行时间
+                cumtime         累计执行时间（包含子函数的执行时间）
+                percall         平均每次执行时间（递归调用只记一次）
+                filename:lineno(function)   具体执行内容说明
+        2.见例t_p_stats.py
+            对profile的结果进行统计分析
