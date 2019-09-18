@@ -1,0 +1,24 @@
+11.2.1 区分list和detail
+    1. 为不同的Serializer定义序列化的类
+        category = serializers.SlugRelatedField(
+            read_only=True,
+            slug_field='name'
+        )
+        外键数据，需要用SlugRelatedField来配置，
+            read_only   定义外键是否可写
+            many        多对多
+            slug_field  指定展示的字段
+11.2.2 实现分页
+    1. 在setting、中增加配置
+        REST_FRAMEWORK = {
+            'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
+            'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+            'PAGE_SIZE': 2
+        }
+        默认是LimitOffsetPagination
+        可以替换为：  rest_framework.pagination.PageNumberPagination
+               或：  rest_framework.pagination.CursorPagination
+11.2.3 实现Category接口
+
+
+11.2.4 HyperlinkedModelSerializer的使用
