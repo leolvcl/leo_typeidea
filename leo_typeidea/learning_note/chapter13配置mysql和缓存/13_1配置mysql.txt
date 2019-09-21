@@ -1,0 +1,15 @@
+13.1 配置mysql
+    1. 创建database：
+        create datebase 'leo_typeidea_db' default character set utf8mb4 collate utf8mb4_unicode_ci;
+        CREATE DATABASE "leo_typeidea_db" DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+    2. 配置setting
+    3. 安装包
+        pip install pymysql
+    4. 在主程序__init__.py中添加
+        import pymysql
+        pymysql.install_as_MySQLdb()
+13.1.1  使用CONN_MAX_AGE优化数据库连接
+    'CONN_MAX_AGE': 5 * 60,
+    'OPTIONS': {'charset': 'utf8mb4'}
+13.1.2 配置正式的setting
+    product.py
