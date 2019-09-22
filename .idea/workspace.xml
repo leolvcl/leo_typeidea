@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3ef7a0-03a2-4b7f-9148-47605507b91f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/13_1配置mysql.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/13_2缓存的演化/13_2缓存" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/13_2缓存的演化/cache_functools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/13_2缓存的演化/cache_functools2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/13_2缓存的演化/cachetest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/13_2缓存的演化/learn_cache.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/13_2缓存的演化/power_cache_Decorator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter13配置mysql和缓存/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/product.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter14上线前准备/14_1为用户提供服务/为用户提供服务" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter14上线前准备/14_2标准化打包和自动化部署/14_2标准化打包和自动化部署" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/leo_typeidea/learning_note/chapter14上线前准备/14_2标准化打包和自动化部署/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/develop.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/settings/develop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/leo_typeidea/leo_typeidea/leo_typeidea/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

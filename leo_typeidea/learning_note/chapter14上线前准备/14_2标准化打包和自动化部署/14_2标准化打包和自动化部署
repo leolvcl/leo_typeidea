@@ -1,0 +1,64 @@
+可以修改pip源来修改
+14.2.1 配置项目setup.py
+    打包和安装
+    参数：
+        packages                指明要打入的包
+            1. 发现指定目录下所有的包  find_packages('leo_typeidea')
+            2. 自己写                ['config','commit',...]
+        package_dir             指明上面的包在哪个目录下，若在setup同级目录可以不写
+            package_dir={'': 'leo_typeidea'},
+        package_data            除了.py文件外，还需要打包哪些文件到最终的安装包里
+            package_data={'': [     # 方法一：打包数据文件
+                'themes/*/*/*/*',   # 需要按目录层级匹配
+            ]},
+        include_package_data    指定要打包哪些额外文件，需要依赖MANIFEST.in文件，与上一个配置可以共存
+            # 指定要加入的文件或多个文件，以空格分隔
+            include README.md
+            # 地柜查找leo_typeidea下面所有对应格式的文件
+            recursive-include leo_typeidea *.css *.js *.jpg *.html *.md
+    其他参数
+        install_requires    指明依赖版本
+        extras_require      额外的依赖类似这种命令 pip install 'gunicorn[gevent]'
+        scripts             指明要放到bin目录下的可执行文件
+        entry_points        程序执行的点
+        classifiers         说明项目当前状况
+14.2.2 sdist与bdist_wheel
+    sdist           源码分发，source distribution，.tar.gz格式
+    bdist_wheel     wheel格式，以.whl结尾
+    配置
+        [bdist_wheel]
+        python-tag = py36
+        # universal=0   仅限当前版本
+        # universal=1   2和3通用
+    上传pypi服务器
+        python setup.py sdist bdist_wheel upload -r internal
+14.2.3 配置内部pypi服务器
+    1. 安装
+        pip install pypiserver
+    2. 启动
+        pypi-server -p 18080 -P /opt/mypypi/.htaccess /opt/mypypi/packages
+                    端口号     指定认证文件              上传的包存放目录
+    3. 注    .htaccess 是Apache的一个工具生成
+        yum install httpd-tools
+        htpasswd -sc /opt/mypypi/.htaccess leolvcl
+    4. 服务器配置完后，配置客户端
+        用户家目录新增 .pypirc文件
+            [distutils]
+            index-servers = internal
+            [internal]
+            repository: http://127.0.0.1:18080/
+            username: leo
+            password: lion
+    5. 再次运行python setup.py sdist bdist_wheel upload -r internal 上传
+    6.可以使用devpi，更强大的pypi服务器包
+14.2.4 自动化部署
+    1. 打包上传到pypi服务器 python setup.py sdist bdist_wheel upload -r internal
+    2. 登录生产服务器       ssh root@ip
+    3. 检查或创建虚拟环境   less my-venv/.bin/activate 或者 python3.6 -m venv my_venv
+    4. 激活虚拟环境        source my_venv/.bin/activate
+    5. 安装对应包          pip install ...
+    6. 上传               supervisord.conf
+    7. 启动               supervisord
+
+    选择paramiko或者Fabric  需要两个工具Ansible和Salt
+14.2.5 编写fabfile配置项目根目录新增fabfile.py
